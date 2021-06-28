@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=>, initial-scale=1.0" />
+    <title>구구단</title>
+    <script
+      crossorigin
+      src="http://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="http://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="http://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class GuGuDan extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            first: Math.ceil(Math.random() * 9),
+            second: Math.ceil(Math.random() * 9),
+            value: "",
+            result: "",
+          };
+        }
+
+        onSubmit = (e) => {
+          e.preventDefault(); //submit 고유의 동작(input전송)을 중단 시키는 것
+          //구구딘 로직
+          if (
+            parseInt(this.state.value) ===
+            this.state.first * this.state.second
+          ) {
+            this.setState((prevState) => {
+              return {
+                result:
+                  prevState.first +
+                  "곱하기" +
+                  prevState.second +
+                  "은" +
+                  prevState.value +
+                  "정답",
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                value: " ",
+              };
+            });
+            this.input.focus(); //커서가 엔터를 쳐도 계속 있도록 설정
+          } else {
+            this.setState({
+              result: "떙",
+              value: " ",
+            });
+            this.input.focus();
+          }
+        };
+
+        onChange = (e) => this.setState({ value: e.target.value });
+
+        input; // Dom에 직접 접근하기 위함
+
+        onRefInput = (c) => {
+          this.input = c; //Dom에 직접 접근하기 위함
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              <div>
+                {this.state.first}곱하기{this.state.second}는?
+              </div>
+              <form onSubmit={this.onSubmit}>
+                <input
+                  ref={this.onRefInput}
+                  type="number"
+                  value={this.state.value}
+                  onChange={this.onChange}
+                />
+                <button>입력</button>
+              </form>
+              <div>{this.state.result}</div>
+            </React.Fragment>
+          );
+        }
+      }
+    </script>
+    <script type="text/babel">
+      ReactDOM.render(<GuGuDan />, document.querySelector("#root"));
+    </script>
+  </body>
+</html>
