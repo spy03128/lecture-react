@@ -2,14 +2,14 @@ const path = require("path"); //node에서 제공하는 경로를 쉽게 조작�
 const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
-  name: "wordrelay-setting", //임의로 설정
+  name: "numberbaseball-setting", //임의로 설정
   mode: "development", //배포할때는 여기를 production으로 변경
   devtool: "eval",
   resolve: {
     extensions: [".js", ".jsx"],
   },
 
-  //입력 - client.jsx  WordRelay.jsx
+  //입력 - client.jsx  NumberBaseball.jsx
   entry: {
     app: ["./client"],
   },
