@@ -48,7 +48,7 @@ module.exports = {
     // publicPath: "/dist",
   },
   devServer: {
-    publicPath: "/dist", //가상경로 express.static(__dirname,'dist') 과 비슷
+    publicPath: "/dist/", //가상경로 express.static(__dirname,'dist') 과 비슷
     hot: true,
   },
 };
